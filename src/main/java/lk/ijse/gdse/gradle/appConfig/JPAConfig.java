@@ -47,9 +47,8 @@ public class JPAConfig {
     }
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(emf);
         return jpaTransactionManager;
-
     }
 
 }
