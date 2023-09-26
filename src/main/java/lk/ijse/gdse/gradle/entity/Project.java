@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@DynamicUpdate
 public class Project {
     @Id
     private String projectId;

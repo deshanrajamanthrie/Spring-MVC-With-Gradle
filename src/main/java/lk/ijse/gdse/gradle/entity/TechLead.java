@@ -18,6 +18,6 @@ public class TechLead {
     private String id;
     private String name;
     private String address;
-    @OneToMany(mappedBy = "techLead",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "techLead",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Project> projectList;
 }

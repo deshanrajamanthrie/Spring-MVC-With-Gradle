@@ -54,7 +54,10 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDTO searchProject(String id) {
         if (projectRepo.existsById(id)) {
             Project project = projectRepo.findById(id).get();
-            return mapper.map(project, ProjectDTO.class);
+            ProjectDTO map = mapper.map(project, ProjectDTO.class);
+
+            return map;
+
 
         } else {
             throw new RuntimeException("Project Has Not Exists!");

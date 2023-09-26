@@ -17,7 +17,6 @@ public class TechLeadDTO {
    private String id;
    private String name;
    private String address;
-
    private List<ProjectDTO> list;
 
    public TechLeadDTO(String id, String name, String address) {

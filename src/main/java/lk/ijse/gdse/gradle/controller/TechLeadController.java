@@ -14,8 +14,24 @@ public class TechLeadController {
     TechLeadService techLeadService;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void saveTechLead(@RequestBody TechLeadDTO dto){
+    public void saveTechLead(@RequestBody TechLeadDTO dto) {
         techLeadService.saveTechLead(dto);
-
     }
+
+    @PutMapping(path = "put", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public void updateTechLead(@RequestBody TechLeadDTO dto) {
+        techLeadService.updateTechLead(dto);
+    }
+
+    @DeleteMapping(params = {"id"})
+    public void deleteTechLead(@RequestParam("id") String mYid) {
+        techLeadService.deleteTechLead(mYid);
+    }
+
+    @GetMapping(params = {"id"})
+    public TechLeadDTO searchTechLead(@RequestParam("id") String myId) {
+        TechLeadDTO techLeadDTO = techLeadService.searchTechLead(myId);
+        return techLeadDTO;
+    }
+
 }

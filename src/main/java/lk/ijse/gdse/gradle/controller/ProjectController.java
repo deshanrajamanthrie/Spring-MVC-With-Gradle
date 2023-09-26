@@ -31,13 +31,13 @@ public class ProjectController {
         projectService.deleteProject(myId);
     }
 
-    @GetMapping(params = {"projectId"})
-    public ProjectDTO searchProjects(@RequestParam("projectId") String id) {
+    @GetMapping(path = "{projectId}")
+    public ProjectDTO searchProjects(@PathVariable("projectId") String id) {
         ProjectDTO projectDTO = projectService.searchProject(id);
         return projectDTO;
     }
 
-    @GetMapping(path = "search")
+    @GetMapping(path = "search",produces = "application/json")
     public List<ProjectDTO> getAllProjects() {
         List<ProjectDTO> allProjects = projectService.getAllProjects();
         return allProjects;
