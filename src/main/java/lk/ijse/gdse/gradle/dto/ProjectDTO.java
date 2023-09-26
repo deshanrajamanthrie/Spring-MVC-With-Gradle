@@ -4,14 +4,14 @@ import lombok.*;
 
 import java.util.List;
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
+
 @NoArgsConstructor
-@ToString
+
 public class ProjectDTO {
     private String projectId;
     private String projectName;
-    private String address;
+    private int memberCount;
     private TechLeadDTO techLead;
 
 }
