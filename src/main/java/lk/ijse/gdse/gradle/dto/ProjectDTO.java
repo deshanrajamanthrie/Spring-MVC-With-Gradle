@@ -12,6 +12,6 @@ public class ProjectDTO {
     private String projectId;
     private String projectName;
     private String address;
-    private List<TechLeadDTO>list;
+    private TechLeadDTO techLead;
 
 }

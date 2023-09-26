@@ -14,5 +14,11 @@ public class TechLeadDTO {
    private String id;
    private String name;
    private String address;
-   private List<TechLeadDTO> list;
+   private List<ProjectDTO> list;
+
+   public TechLeadDTO(String id, String name, String address) {
+      this.id = id;
+      this.name = name;
+      this.address = address;
+   }
 }

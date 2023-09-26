@@ -1,7 +1,9 @@
 package lk.ijse.gdse.gradle.appConfig;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -19,27 +21,31 @@ import javax.sql.DataSource;
 @EnableJpaRepositories("lk.ijse.gdse.gradle.repo")
 @EnableTransactionManagement
 public class JPAConfig {
+    @Autowired
+    Environment env;
+
+
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter vendorAdapter) {
         LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
         bean.setJpaVendorAdapter(vendorAdapter);
         bean.setDataSource(dataSource);
-        bean.setPackagesToScan("lk.ijse.gdse.gradle.entity");
+        bean.setPackagesToScan(env.getRequiredProperty("entity.package.scan"));
         return bean;
     }
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/SEinduestry?createDatabaseIfNotExist=true");
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUsername("root");
-        dataSource.setPassword("1234");
+        dataSource.setDriverClassName(env.getRequiredProperty("SEIndustry.Driver"));
+        dataSource.setUrl(env.getRequiredProperty("SEIndustry.url"));
+        dataSource.setUsername(env.getRequiredProperty("SEIndustry.userName"));
+        dataSource.setPassword(env.getRequiredProperty("SEIndustry.password"));
         return dataSource;
     }
     @Bean
     public JpaVendorAdapter jpaVendorAdapter(){
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
+        adapter.setDatabasePlatform(env.getRequiredProperty("SEIndustry.dbPlatform"));
         adapter.setDatabase(Database.MYSQL);
         adapter.setShowSql(true);
         adapter.setGenerateDdl(true);

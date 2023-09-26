@@ -8,4 +8,5 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = "lk.ijse.gdse.gradle")
 @EnableWebMvc
 public class WebAppConfig {
+
 }
