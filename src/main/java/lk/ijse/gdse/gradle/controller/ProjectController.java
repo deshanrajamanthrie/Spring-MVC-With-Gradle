@@ -2,6 +2,7 @@ package lk.ijse.gdse.gradle.controller;
 
 import lk.ijse.gdse.gradle.dto.ProjectDTO;
 import lk.ijse.gdse.gradle.service.ProjectService;
+import lk.ijse.gdse.gradle.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +32,16 @@ public class ProjectController {
         projectService.deleteProject(myId);
     }
 
-    @GetMapping(path = "{projectId}")
-    public ProjectDTO searchProjects(@PathVariable("projectId") String id) {
-        ProjectDTO projectDTO = projectService.searchProject(id);
-        return projectDTO;
+    @GetMapping(path = "search",params = "projectId",produces =MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchProjects(@RequestParam("projectId") String id) {
+        System.out.println(id);
+        //return projectService.searchProject(id);
+       return new ResponseUtil("200","OK",projectService.searchProject(id));
+
+
     }
 
-    @GetMapping(path = "search",produces = "application/json")
+    @GetMapping(path = "get",produces = "application/json")
     public List<ProjectDTO> getAllProjects() {
         List<ProjectDTO> allProjects = projectService.getAllProjects();
         return allProjects;

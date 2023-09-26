@@ -9,8 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 public class Project {
     @Id
@@ -18,6 +17,7 @@ public class Project {
     private String projectName;
     private  int memberCount;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "id")
     private TechLead techLead;
 }
+

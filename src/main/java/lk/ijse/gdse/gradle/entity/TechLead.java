@@ -4,6 +4,7 @@ import lk.ijse.gdse.gradle.dto.ProjectDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,6 +19,7 @@ public class TechLead {
     private String id;
     private String name;
     private String address;
+    @ToString.Exclude
     @OneToMany(mappedBy = "techLead",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Project> projectList;
 }
