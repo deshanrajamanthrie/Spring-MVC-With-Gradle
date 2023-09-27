@@ -54,10 +54,8 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectDTO searchProject(String id) {
         if (projectRepo.existsById(id)) {
             Project project = projectRepo.findById(id).get();
-            ProjectDTO map = mapper.map(project, ProjectDTO.class);
-
-            return map;
-
+            project.getTechLead().setProjectList(null);
+            return mapper.map(project, ProjectDTO.class);
         } else {
             throw new RuntimeException("Project Has Not Exists!");
         }
@@ -70,13 +68,9 @@ public class ProjectServiceImpl implements ProjectService {
         for (Project list : all) {
             list.getTechLead().setProjectList(null);
         }
-       return mapper.map(projectRepo.findAll(), new TypeToken<List<ProjectDTO>>() {
+        return mapper.map(projectRepo.findAll(), new TypeToken<List<ProjectDTO>>() {
         }.getType());
-
-
-
-       /* return mapper.map(projectRepo.findAll(), new TypeToken<List<ProjectDTO>>() {
-        }.getType());*/
     }
+
 
 }

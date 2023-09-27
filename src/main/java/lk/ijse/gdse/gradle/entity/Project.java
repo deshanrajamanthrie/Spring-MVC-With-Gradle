@@ -15,9 +15,9 @@ public class Project {
     @Id
     private String projectId;
     private String projectName;
-    private  int memberCount;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id")
+    private int memberCount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private TechLead techLead;
 }
 

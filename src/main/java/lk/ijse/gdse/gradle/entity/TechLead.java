@@ -20,6 +20,6 @@ public class TechLead {
     private String name;
     private String address;
     @ToString.Exclude
-    @OneToMany(mappedBy = "techLead",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "techLead",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Project> projectList;
 }

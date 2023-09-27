@@ -52,6 +52,7 @@ public class JPAConfig {
         adapter.setDatabase(Database.MYSQL);
         adapter.setShowSql(true);
         adapter.setGenerateDdl(true);
+
         return adapter;
     }
     @Bean
