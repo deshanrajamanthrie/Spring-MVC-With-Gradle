@@ -2,6 +2,7 @@ package lk.ijse.gdse.gradle.controller;
 
 import lk.ijse.gdse.gradle.dto.TechLeadDTO;
 import lk.ijse.gdse.gradle.service.TechLeadService;
+import lk.ijse.gdse.gradle.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +15,23 @@ public class TechLeadController {
     TechLeadService techLeadService;
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void saveTechLead(@RequestBody TechLeadDTO dto) {
+    public ResponseUtil saveTechLead(@RequestBody TechLeadDTO dto) {
         techLeadService.saveTechLead(dto);
+        return new ResponseUtil(200, "Save Successfully!", null);
     }
 
     @PutMapping(path = "put", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void updateTechLead(@RequestBody TechLeadDTO dto) {
+    public ResponseUtil updateTechLead(@RequestBody TechLeadDTO dto) {
         techLeadService.updateTechLead(dto);
+        return new ResponseUtil(200, "Update Successfully", null);
+
     }
 
     @DeleteMapping(params = {"id"})
-    public void deleteTechLead(@RequestParam("id") String mYid) {
+    public ResponseUtil deleteTechLead(@RequestParam("id") String mYid) {
         techLeadService.deleteTechLead(mYid);
+        return new ResponseUtil(200, "Delete Successfully", null);
+
     }
 
     @GetMapping(params = {"id"})

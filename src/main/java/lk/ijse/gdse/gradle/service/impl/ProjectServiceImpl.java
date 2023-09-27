@@ -66,8 +66,17 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDTO> getAllProjects() {
-        return mapper.map(projectRepo.findAll(), new TypeToken<List<ProjectDTO>>() {
+        List<Project> all = projectRepo.findAll();
+        for (Project list : all) {
+            list.getTechLead().setProjectList(null);
+        }
+       return mapper.map(projectRepo.findAll(), new TypeToken<List<ProjectDTO>>() {
         }.getType());
+
+
+
+       /* return mapper.map(projectRepo.findAll(), new TypeToken<List<ProjectDTO>>() {
+        }.getType());*/
     }
 
 }

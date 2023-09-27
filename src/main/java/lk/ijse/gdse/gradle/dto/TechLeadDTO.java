@@ -11,9 +11,7 @@ import java.util.SplittableRandom;
 @NoArgsConstructor
 @ToString
 public class TechLeadDTO {
-   public TechLeadDTO(String id) {
-      this.id = id;
-   }
+   
    private String id;
    private String name;
    private String address;
