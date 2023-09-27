@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("tech")
 @CrossOrigin
@@ -35,9 +37,15 @@ public class TechLeadController {
     }
 
     @GetMapping(params = {"id"})
-    public TechLeadDTO searchTechLead(@RequestParam("id") String myId) {
-        TechLeadDTO techLeadDTO = techLeadService.searchTechLead(myId);
-        return techLeadDTO;
+    public ResponseUtil searchTechLead(@RequestParam("id") String myId) {
+      return new ResponseUtil(200,"OK",techLeadService.searchTechLead(myId));
+
+    }
+
+    @GetMapping(path = "getAll")
+    public ResponseUtil getAllTech(){
+        return new ResponseUtil(200,"GetAll Successfully!",techLeadService.getAllTechLead());
+
     }
 
 }

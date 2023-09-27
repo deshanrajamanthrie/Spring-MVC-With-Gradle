@@ -45,9 +45,10 @@ public class ProjectController {
     }
 
     @GetMapping(path = "/get", produces = "application/json")
-    public List<ProjectDTO> getAllProjects() {
-        List<ProjectDTO> allProjects = projectService.getAllProjects();
-        return allProjects;
+    public ResponseUtil getAllProjects() {
+        /*List<ProjectDTO> allProjects = projectService.getAllProjects();
+        return allProjects;*/
+     return new ResponseUtil(200,"Get All Successfully!",projectService.getAllProjects());
     }
 
 

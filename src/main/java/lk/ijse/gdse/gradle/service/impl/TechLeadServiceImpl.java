@@ -1,13 +1,17 @@
 package lk.ijse.gdse.gradle.service.impl;
 
 import lk.ijse.gdse.gradle.dto.TechLeadDTO;
+import lk.ijse.gdse.gradle.entity.Project;
 import lk.ijse.gdse.gradle.entity.TechLead;
 import lk.ijse.gdse.gradle.repo.TechLeadRepo;
 import lk.ijse.gdse.gradle.service.TechLeadService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -47,12 +51,22 @@ public class TechLeadServiceImpl implements TechLeadService {
     }
 
     public TechLeadDTO searchTechLead(String id) {
-        if (!repo.existsById(id)) {
-            throw new RuntimeException("Can Not Find The LechLead!");
-        } else {
+        if (repo.existsById(id)) {
             TechLead techLead = repo.findById(id).get();
+            techLead.setProjectList(null);
             return modelMapper.map(techLead, TechLeadDTO.class);
+        } else {
+            throw new RuntimeException("Can Not Find The LechLead!");
         }
+    }
+
+    public List<TechLeadDTO> getAllTechLead() {
+        List<TechLead> all = repo.findAll();
+        for (TechLead techLead : all) {
+            techLead.setProjectList(null);
+        }
+        return modelMapper.map(all, new TypeToken<List<TechLeadDTO>>() {
+        }.getType());
     }
 
 
